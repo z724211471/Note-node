@@ -1,5 +1,6 @@
 import * as Rourter from 'koa-router'
 import {operatingUser} from '../mysql/adduser'
+
 const router = new Rourter();
 interface Userdata {
     username: string;
@@ -21,7 +22,6 @@ if(!data['username']&&!data['password']){
 }else{
   try {
    let userdata = await operatingUser.addUser(data);
-   console.log(userdata);
 if(userdata['code']===0){
     ctx.body={
         code:401,
@@ -39,10 +39,7 @@ if(userdata['code']===0){
         data:'用户添加失败'
     } 
   }
-       
-   
 }
-
 })
 router.post('/openlogin',async(ctx,next)=>{
     console.log(ctx.request.body)

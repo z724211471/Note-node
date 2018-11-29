@@ -24,6 +24,7 @@
       "reflect-metadata": "^0.1.10",
       "sequelize": "^4.41.1",
       "sequelize-typescript": "^0.6.6",
+      "ts-md5": "^1.2.4",
       "typeorm": "0.2.8"
    },
    "devDependencies": {
