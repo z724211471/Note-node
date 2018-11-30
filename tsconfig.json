@@ -11,5 +11,13 @@
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
       "sourceMap": true
-   }
+   },
+   "include": [
+      "router/*.ts",
+      "mysql/*.ts",
+      "*.ts",
+    ],
+    "exclude": [
+      "node_modules"
+    ]
 }
