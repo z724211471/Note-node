@@ -1,8 +1,10 @@
+import { Note } from './mysql/text';
 import "reflect-metadata";
 import { createConnection } from "typeorm";
 import { router } from "./router/adminlogin"
 import { noterouter } from "./router/Note"
 import * as bodyParser  from "koa-bodyparser"
+
 const Koa = require("koa");
 
 var cors = require("koa-cors");
@@ -21,9 +23,7 @@ createConnection({
     synchronize: true,
     logging: false
 }).then(connection => {
-    // here you can start to work with your entities\
 
-   // console.log(connection);
 }).catch(error => console.log(error));
 const app = new Koa();
 app.use(cors());

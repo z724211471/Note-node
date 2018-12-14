@@ -1,4 +1,4 @@
-import { getRepository,getManager } from 'typeorm';
+import { getRepository,getManager,createConnection} from 'typeorm';
 import { Note } from './text';
 
 export  const operatingNote={
@@ -23,5 +23,12 @@ export  const operatingNote={
         text.text=userdata['text'];
         text.updata_time=new Date();
         return  await getRepository(Note).save(text); 
+    },
+    statistics:async(userdata:object)=>{
+            return await  getRepository(Note).createQueryBuilder('note')
+            .select("Count(*) AS count")
+            .addSelect("DATE_FORMAT(note.add_time,'%Y-%m-%d') AS addtime")
+            .where("note.userid=:id",{id:userdata['userid']})
+            .groupBy("DATE_FORMAT(note.add_time,'%Y-%m-%d')").getRawMany();  
     }
 }

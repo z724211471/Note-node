@@ -52,7 +52,7 @@ router.post('/openlogin',async(ctx,next)=>{
     }else{
       let dsx = await operatingUser.selectUser(data);
       console.log(dsx);
-      if(dsx===undefined){
+      if(!dsx){
         ctx.body={
             code:401,
             data:'用户名或密码错误',
@@ -66,6 +66,8 @@ router.post('/openlogin',async(ctx,next)=>{
       
     }
 })
+
+
 export {
     router,
   }

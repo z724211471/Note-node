@@ -15,7 +15,7 @@
    "include": [
       "router/*.ts",
       "mysql/*.ts",
-      "*.ts",
+      "*.ts"
     ],
     "exclude": [
       "node_modules"

@@ -78,6 +78,7 @@ router.post('/updataNote',async(ctx,next)=>{
             code:401,
             data:'请传入ID'
         }
+
     }else{
         let note=await operatingNote.updataNote(data);
         console.log(note);
@@ -93,6 +94,22 @@ router.post('/updataNote',async(ctx,next)=>{
             } 
         }
     }
+})
+router.post('/countnote',async(ctx,next)=>{
+    const data:object=ctx.request.body;
+    if(!data['userid']){
+        ctx.body={
+            code:401,
+            data:'请传入ID'
+        }
+        return;
+    }
+    let countdata =await operatingNote.statistics(data);
+    console.log(countdata);
+    ctx.body={
+        code:200,
+        data:countdata
+    } 
 })
 export {
     noterouter,
