@@ -1,6 +1,6 @@
 import * as Rourter from 'koa-router'
 import {operatingUser} from '../mysql/adduser'
-
+import {set,get} from 'js-cookie'
 const router = new Rourter();
 interface Userdata {
     username: string;
@@ -58,12 +58,20 @@ router.post('/openlogin',async(ctx,next)=>{
             data:'用户名或密码错误',
         }
       }else{
+        ctx.cookies.set('userid', '1',{
+            domain: 'localhost',  // 写cookie所在的域名
+            path: '/openlogin',       // 写cookie所在的路径
+            maxAge: 10 * 60 * 1000, // cookie有效时长
+            expires: new Date('2018-12-27'),  // cookie失效时间
+            httpOnly: false,  // 是否只用于http请求中获取
+            overwrite: false  // 是否允许重写
+          });
+        ctx.cookies.get('userid');
         ctx.body={
             code:200,
             data:dsx,
         }
       }
-      
     }
 })
 

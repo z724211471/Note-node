@@ -26,7 +26,16 @@ createConnection({
 
 }).catch(error => console.log(error));
 const app = new Koa();
-app.use(cors());
+app.use(cors({
+    origin: function (ctx) {
+        console.log(ctx);
+     
+        return 'http://localhost:3000'; // 允许来自所有域名请求
+        
+     
+    },
+    credentials: true,
+}));
 app.use(bodyParser());
  app.use(router.routes()).use(router.allowedMethods());
  app.use(noterouter.routes()).use(noterouter.allowedMethods());

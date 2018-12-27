@@ -1,6 +1,7 @@
 import * as Rourter from 'koa-router'
 import {operatingNote} from '../mysql/addText' 
 import { router } from './adminlogin';
+import {get} from 'js-cookie'
 const noterouter = new Rourter();
 noterouter.post('/addNote',async(ctx,next)=>{
   const data : object = ctx.request.body;
@@ -34,8 +35,9 @@ if(notedata){
 }
 });
 router.post('/getUserNote',async(ctx,next)=>{
-    const data : object = ctx.request.body;
-    if(!data['userid']){
+    const data:string = ctx.cookies.get('userid');
+    console.log(data);
+    if(!data){
         ctx.body={
             code:401,
             data:'没有登录'
@@ -78,7 +80,6 @@ router.post('/updataNote',async(ctx,next)=>{
             code:401,
             data:'请传入ID'
         }
-
     }else{
         let note=await operatingNote.updataNote(data);
         console.log(note);

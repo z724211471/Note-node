@@ -11,8 +11,8 @@ export  const operatingNote={
         text.updata_time = new Date();
         return await getManager().save(Note,text);
     },
-    userNote:async(userdata:object)=>{
-    return await getRepository(Note).find({where:{userid:userdata['userid']}});
+    userNote:async(userdata:string)=>{
+    return await getRepository(Note).find({where:{userid:userdata}});
     },
     findNote:async(userdata:object)=>{
         return await getRepository(Note).findOne({where:{id:userdata['noteid']}});
